@@ -1,4 +1,4 @@
-# 🚀 SKT FLY AI Challengers (Cohort N기)
+# 🚀 SKT FLY AI Challengers (8기)
 > SKT FLY AI Challengers에서의 학습 과정과 프로젝트 회고를 담은 리포지토리입니다.
 
 <br>
