@@ -1,14 +1,14 @@
-# 🚀 SKT FLY AI Challengers (8기)
+# SKT FLY AI Challengers (8기)
 > SKT FLY AI Challengers에서의 학습 과정과 프로젝트 회고를 담은 리포지토리입니다.
 
 <br>
 
-## 📅 Period
+## Period
 **2025.12.22 ~ 2026.02.27**
 
 <br>
 
-## 📝 Background & Motivation
+## Background & Motivation
 
 **1. 실무 경험과 편입의 계기**
 이전에는 IT 서비스의 현장에서 실무 감각을 익혔습니다.
@@ -50,7 +50,7 @@
 
 <br>
 
-## 🎉 Result
+##  Result
 **[최종 합격]**
 - 초기 예비 합격 통보를 받았으나, 일주일 뒤 **추가 합격** 연락을 받아 합류하게 되었습니다.
 
