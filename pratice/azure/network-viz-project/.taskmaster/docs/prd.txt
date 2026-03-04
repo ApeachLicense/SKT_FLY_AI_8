@@ -1,0 +1,76 @@
+TASK MASTER: Git Log Visualization PRD
+Overview
+Task Master의 새로운 Git Log Visualization 기능은 텍스트 기반의 git log 명령어가 주는 정보의 한계를 극복하고, 프로젝트의 커밋 히스토리, 브랜치 분기 및 병합 흐름을 직관적인 그래프 형태로 시각화하여 제공하는 웹 페이지입니다. 이를 통해 개발자는 복잡한 프로젝트의 구조를 빠르게 파악하고, 코드 변경 이력을 효과적으로 추적할 수 있습니다.
+
+Core Features
+1. Git Log 시각화 (Interactive Graph Visualization)
+What it does: Git 저장소의 커밋 기록을 노드(Node)와 엣지(Edge) 형태의 방향성 비순환 그래프(DAG)로 시각화합니다.
+Why it's important: 브랜치의 분기(Branching)와 병합(Merging) 지점을 한눈에 파악하여 코드 흐름을 이해하는 데 도움을 줍니다.
+How it works: 백엔드에서 git log 데이터를 파싱하여 JSON 형태로 변환하고, 프론트엔드 그래프 라이브러리를 통해 렌더링합니다.
+2. 커밋 상세 정보 조회 (Commit Details Viewer)
+What it does: 그래프의 커밋 노드를 클릭하면 해당 커밋의 상세 정보(작성자, 날짜, 메시지, 변경된 파일 목록, diff 등)를 사이드바 또는 모달로 표시합니다.
+Why it's important: 그래프에서 흐름을 파악한 후, 즉시 구체적인 변경 사항을 확인할 수 있어 문맥 전환 비용을 줄입니다.
+How it works: 노드 클릭 이벤트에 트리거되어 해당 커밋 해시(Hash)로 상세 정보를 비동기 요청하여 표시합니다.
+3. 필터링 및 검색 (Filtering & Search)
+What it does: 작성자(Author), 날짜(Date), 브랜치(Branch), 커밋 메시지 키워드 등으로 그래프를 필터링합니다.
+Why it's important: 방대한 히스토리 중에서 원하는 특정 변경 사항이나 특정 개발자의 작업 내역만 빠르게 찾을 수 있습니다.
+How it works: 상단 검색바 및 필터 옵션을 통해 쿼리를 입력받아 그래프 데이터를 실시간으로 재구성합니다.
+User Experience
+User Personas
+주니어 개발자: 프로젝트의 전체적인 브랜치 전략과 흐름을 이해하는 데 시각적 자료가 필요함.
+테크 리드/시니어 개발자: 코드 리뷰 시 특정 기능의 변경 이력을 추적하거나, 잘못된 병합을 파악해야 함.
+Key User Flows
+실행: CLI에서 taskmaster viz 명령어 실행 -> 로컬 서버 구동 및 브라우저 자동 오픈.
+탐색: 메인 화면에서 전체 그래프 확인 -> 줌 인/아웃 및 패닝(Panning)으로 이동.
+상세 확인: 특정 피처 브랜치의 병합 지점 노드 클릭 -> 우측 패널에서 어떤 파일이 충돌 해결되었는지 확인.
+UI/UX Considerations
+Clean Interface: 그래프가 화면의 중심이 되도록 불필요한 UI 요소 최소화.
+Performance: 커밋이 수천 개 이상인 대형 저장소에서도 부드러운 스크롤과 렌더링 보장 (Virtualization 적용).
+Responsive: 다양한 색상의 브랜치 라인을 사용하여 시각적 구분 명확화.
+Technical Architecture
+System Components
+CLI & Backend (Node.js/Python)
+사용자의 로컬 Git 저장소에 접근하여 git log 명령어 실행 (subprocess).
+Raw 데이터를 구조화된 포맷(JSON)으로 변환하는 파서(Parser).
+프론트엔드 정적 파일 서빙 및 API 엔드포인트 제공.
+Frontend (React)
+Visual Library: D3.js, Vis.js 또는 React flow와 같은 그래프 라이브러리 활용.
+State Management: 필터링 상태 및 데이터 캐싱 관리.
+Data Models
+Commit Node: { hash, parentHashes, author, date, message, branchName }
+Link: { source: parentHash, target: childHash }
+APIs and Integrations
+GET /api/log: 전체 로그 데이터 요청 (페이지네이션 또는 스트리밍 고려).
+GET /api/commit/:hash: 특정 커밋의 상세 Diff 정보 요청.
+Development Roadmap
+Phase 1: MVP (Foundation)
+로컬 서버 구동 CLI 스캐폴딩.
+기본 git log 파싱 및 JSON API 구현.
+단순 그래프 렌더링 (노드 연결 시각화).
+Goal: 사용자가 명령어를 치면 브라우저에 그래프가 떠야 함.
+Phase 2: Usability (Enhancements)
+커밋 상세 보기 사이드바 구현.
+줌/패닝 기능 및 UI 스타일링 고도화.
+브랜치 별 색상 구분 적용.
+Phase 3: Advanced Features
+검색 및 필터링 기능.
+대용량 로그 처리를 위한 성능 최적화 (Virtual Scrolling).
+변경된 파일의 Diff 코드 하이라이팅 뷰어.
+Logical Dependency Chain
+Backend Log Parser: 로그 데이터를 가져오지 못하면 시각화가 불가능하므로 가장 먼저 개발되어야 함.
+Frontend Graph Skeleton: 데이터를 받아 화면에 점과 선으로라도 그리는 것이 우선. 디자인은 그 다음.
+Interaction: 그래프가 그려진 후 클릭 이벤트 등 상호작용 추가.
+Risks and Mitigations
+Technical Challenges
+대용량 레포지토리 성능 문제: 리눅스 커널과 같이 커밋이 수십만 개인 경우 브라우저 렌더링이 느려질 수 있음.
+Mitigation: 윈도우잉(Windowing) 기법 적용, Canvas 기반 렌더링 고려, 초기 로딩 시 최근 N개 커밋만 로드.
+복잡한 Git 그래프: 머지가 많은 경우 그래프가 "지하철 노선도"처럼 복잡하게 꼬일 수 있음.
+Mitigation: 알고리즘을 통해 라인 겹침 최소화, "Simplify Graph" 옵션 제공.
+Resource Constraints
+브라우저 메모리: DOM 요소가 너무 많으면 크래시 발생 가능.
+Mitigation: SVG 대신 Canvas 사용 또는 가상화 필수.
+Appendix
+Research Findings
+Existing Tools: GitKraken, SourceTree의 그래프 뷰가 참고 대상. 웹 기반으로는 git-graph (VSCode extension) 등이 있음.
+Technical Specifications
+Git Log Format: git log --pretty=format:"%H|%p|%an|%ad|%s" --date=iso 형태로 파싱 예정.
