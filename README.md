@@ -7,6 +7,7 @@ Python, 딥러닝, 컴퓨터 비전, AI 에이전트, Azure 실습을 주제별�
 | [python_basics](python_basics/) | Python, HTTP 요청, MySQL, Streamlit 예제 |
 | [deep_learning](deep_learning/) | PyTorch 텐서, 자동 미분, CNN·ResNet·ViT, Grad-CAM 과제 |
 | [computer_vision](computer_vision/) | OpenCV 영상 처리, 광류, MediaPipe, YOLO·OpenVINO 실습 |
+| [OpenVINO-Gaze-Tracker-main](OpenVINO-Gaze-Tracker-main/) | OpenVINO 기반 시선 추적·얼굴 속성 분석 프로젝트 |
 | [ai_agents](ai_agents/) | LangChain, RAG, LangGraph, 메모리, MCP 및 오디오 처리 단계 |
 | [cloud_azure](cloud_azure/) | Azure Blob Storage, 이미지 분석, Express, Functions, Git 시각화 |
 
@@ -38,6 +39,8 @@ python -m jupyterlab
 필요한 경우 `.env.example`을 `.env`로 복사하고 자신의 값을 입력하세요. `ai_agents` 예제는 `python-dotenv`로 이 파일을 읽습니다. Azure Python 예제는 운영체제 환경변수를 사용합니다. 설정 방법은 [Azure 안내](cloud_azure/README.md)에 있습니다.
 
 `.env`, Azure 로컬 설정, 캐시, 다운로드한 모델, 편집기 설정은 Git에서 제외합니다. API 키를 코드·노트북 셀·출력에 직접 넣지 마세요.
+
+커밋·push 전 검사를 활성화하려면 `git config core.hooksPath .githooks`를 실행하세요. GitHub에서도 전체 기록을 검사합니다. 설정과 기록 정리 후 주의 사항은 [인증 정보 보호 안내](docs/secret-protection.md)를 참고하세요.
 
 ## 학습 자료와 미완성 예제
 

@@ -1,0 +1,4 @@
+# Downloaded Open Model Zoo weights and IR files remain local.
+/models/intel/
+# Generated machine-specific model inventory.
+/first.txt

@@ -1,0 +1,17 @@
+title = "Repository credential protection"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "openai-key-preview"
+description = "OpenAI credentials, including accidentally printed prefixes"
+regex = '''\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{16,}'''
+keywords = ["sk-"]
+
+[[rules]]
+id = "azure-storage-account-key"
+description = "Azure Storage connection-string account key"
+regex = '''AccountKey=([A-Za-z0-9+/]{40,}={0,2})'''
+secretGroup = 1
+keywords = ["AccountKey"]
